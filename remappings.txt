@@ -1,0 +1,5 @@
+ERC4626/=lib/ERC4626/src/
+ds-test/=lib/solmate/lib/ds-test/src/
+forge-std/=lib/forge-std/src/
+openzeppelin-contracts/=lib/openzeppelin-contracts/
+solmate/=lib/solmate/src/

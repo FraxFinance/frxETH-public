@@ -1,0 +1,112 @@
+[
+    {
+        "pubkey": "a529622c7845262390888c7e907a53367877d683a28e94a96323c833701a061cd34aaa6ed82389f0690b3c063a67678b",
+        "withdrawal_credentials": "010000000000000000000000b1748c79709f4ba2dd82834b8c82d4a505003f27",
+        "amount": 32000000000,
+        "signature": "b80cfb30ca6a7f3df09cfb8ce841140b39f0ef384b315a7294e294f7bfcb5407a3557b8e6668ce46a3278955157148461248d735efc00a3693ae6d662c3e7aa87585df48d1cbe043de304ac45e0f01193d0346e6914df3c173c3ae5fa89b03c6",
+        "deposit_message_root": "9b282b14d9d7d4f534a8aedf1c951536d535cf181a521cc4a488490bb17d44c0",
+        "deposit_data_root": "6f88fb0dd4066bbfe051c28571755527ab4b409e50affdd8b7fdaecfe5975f65",
+        "fork_version": "00000000",
+        "network_name": "mainnet",
+        "deposit_cli_version": "2.3.0"
+    },
+    {
+        "pubkey": "92fd82c005bccc00a1ee8aed9d66d3d1d165c3ee397f06cb5989110817ba35c983cdf2f8d965b5ed3792cb40cf6346a6",
+        "withdrawal_credentials": "010000000000000000000000b1748c79709f4ba2dd82834b8c82d4a505003f27",
+        "amount": 32000000000,
+        "signature": "82860f7006e8dc9dd84287b56b013da0e3d598047f85b72d862b3d2fc5fa208395cef0fc881e54c2fc250f2c1f3c537510090515b313244c0a4e3098312c4479163ad69ee4cd3d230e8cbd34de97c51c31dca60b40aa138c18c2e9918a2faf79",
+        "deposit_message_root": "ff3401ef8fe06cf1c5c57263dbd8c415bef110d1cab8a188d1ecfd789dc6b8f3",
+        "deposit_data_root": "6c62729d4f168a8ff11224ef375d942dc0528eb68b750cc6efe790ca62c30d5b",
+        "fork_version": "00000000",
+        "network_name": "mainnet",
+        "deposit_cli_version": "2.3.0"
+    },
+    {
+        "pubkey": "aecdd7f48a7299e964e56470ef5a596afdb0a4d6d12aa6f308c0740042dc794da862fd517cf44f9d86a023b2ffa9ae41",
+        "withdrawal_credentials": "010000000000000000000000b1748c79709f4ba2dd82834b8c82d4a505003f27",
+        "amount": 32000000000,
+        "signature": "a63990b9d2a4781773f11d8b4750a1668213e292ed4a8f01b86d0a4ae011a5915e97bcd6a3ed0bb3fc589e07459b32d80c295171f73fe75e9b1299685ec6d79f84f0b8cff703a541958e27f1ca7ee126716cd0157b1d07896f4167ff1ebdbec2",
+        "deposit_message_root": "3dcf60c1331bf6a443e19e68ec17fb9182a9137a57582a5416e9d040a044d46a",
+        "deposit_data_root": "1c7101589ca14a74c3e2a7da9092ccb18dc1064e1abbee8d73b811f8d4cad57d",
+        "fork_version": "00000000",
+        "network_name": "mainnet",
+        "deposit_cli_version": "2.3.0"
+    },
+    {
+        "pubkey": "a4f1932c46cba49b994cec513fd360952b30937852d6a967be4cf10e08cc81976fd156f6a92f4ddb626cd19c4da90bcf",
+        "withdrawal_credentials": "010000000000000000000000b1748c79709f4ba2dd82834b8c82d4a505003f27",
+        "amount": 32000000000,
+        "signature": "8e67371cb156fd94b35fd0882c0f4960669cef4ee06a4a05ae5fe15df915d363315d76426316ec7cdf31e766be52adda0aaaa825834f7739637665335d344b0a9b162fecd4cfe96f1d6a1df2596af84c247120f70ba08bd3b826a0ff32b6c9f0",
+        "deposit_message_root": "ccba4fd74e8b22c235640549ba9477845a31773956ed80df802e3fd6af784f62",
+        "deposit_data_root": "4645ce50940a306f2a120a8f2a80fd86bd9567760c3a742cf50aee9acfaa6c8a",
+        "fork_version": "00000000",
+        "network_name": "mainnet",
+        "deposit_cli_version": "2.3.0"
+    },
+    {
+        "pubkey": "ac3a616dabf00408575a992bb396569a0743ca16d6b0aee94009eb249c7efd84159351378722a1aba962406a5d404003",
+        "withdrawal_credentials": "010000000000000000000000b1748c79709f4ba2dd82834b8c82d4a505003f27",
+        "amount": 32000000000,
+        "signature": "b0749f93c5a05b8dc7d9db4db11be49164f122dbf860fd70d7b95fcf3acafc6226d2b5b2c8d50066b74747393b1f234c19b7a1aea8c6ea015e0794d41e881e36759a213db978b22b54dd8201eb4a548a6674d4a54f46d0262a7a7bc66d34915f",
+        "deposit_message_root": "b162c583b8590a729b62771eea78162c3b492d056ece51ea88b7f904b0fcac13",
+        "deposit_data_root": "ba484eaed86677a57cdcd5edaf7b5c5a1800155c1ea938e3af21f6b49031e93d",
+        "fork_version": "00000000",
+        "network_name": "mainnet",
+        "deposit_cli_version": "2.3.0"
+    },
+    {
+        "pubkey": "9345476b082db3c0275db9bd6120b31a5dd4263ee7448417399a6692be40cffae1f73e98d9293e09c45f969af9487213",
+        "withdrawal_credentials": "010000000000000000000000b1748c79709f4ba2dd82834b8c82d4a505003f27",
+        "amount": 32000000000,
+        "signature": "b78c6a822429b1030b3271a00c438d2f60cd41b9b0b745657cff256255d2efc1df0c4f535d7a464f116d51da0baea82b1309a409cfd08625ff57e99268436a53149b0a6c78cf4fc960577b13979dbfa505098ed06b85bf110fda8d6e062bb0e7",
+        "deposit_message_root": "ecdf44a9593e71eec0f7b4e74d1b1be88037e1bcd8c3a79b1ee62503517d0e88",
+        "deposit_data_root": "35485841a07f8b4f451c2de59db71aa2440e661f8127198a2516c9d5c1fa463e",
+        "fork_version": "00000000",
+        "network_name": "mainnet",
+        "deposit_cli_version": "2.3.0"
+    },
+    {
+        "pubkey": "92d8b37ec392e9be8140940470bd4898beb72b5e4c700d1a5bd30e5a4bdcca4b08dfcd12edd520812939f14893f3fe91",
+        "withdrawal_credentials": "010000000000000000000000b1748c79709f4ba2dd82834b8c82d4a505003f27",
+        "amount": 32000000000,
+        "signature": "92aa7bfb6366b90044f9ecaa51d224e918c8ab908d92074a5d2f08b682d389f9f82aab9ca124d547a6ac568688d84aa0060afc4c38ce1e9099c824278b165cc5a5a5b678e5294122e1cb62962cdb73c7ded073baaf66bdca44a5dcf545bb2c12",
+        "deposit_message_root": "089b34fa34d9e3bdc16c0b77bcff3b5f813295f6c13ebce69ef1cdfde6917a90",
+        "deposit_data_root": "22c30a381ca5b77b8993caae6ecb8616c71ec3fa2aeae4a20c71633f7ae105cb",
+        "fork_version": "00000000",
+        "network_name": "mainnet",
+        "deposit_cli_version": "2.3.0"
+    },
+    {
+        "pubkey": "ade01d28ec05ee37c1f946aa45662ca12522febcc4395bb0a6b2a7a655ecc3f44114f26dd760d5e7581c2e3827d78a23",
+        "withdrawal_credentials": "010000000000000000000000b1748c79709f4ba2dd82834b8c82d4a505003f27",
+        "amount": 32000000000,
+        "signature": "938f5e1fbac1977d925ce155c4c2961a5d5ab11e413b5e443ad3183421f5be524d368cec721687c67697ed2256f4721812c0cb77224ccc634e787455592448801ac70412bbc0cba926002ad9efc39c9570203fb204200bbe6a23f37591b93ecd",
+        "deposit_message_root": "719c4e6bbbd745fe41c0e60081788ed7f4c69558b5c499edbcc1d02721e7ebb4",
+        "deposit_data_root": "5a3a655f18dd4e053be8bd07a3c55d9183116c4f269b9f6e146bdc0dacb3c16e",
+        "fork_version": "00000000",
+        "network_name": "mainnet",
+        "deposit_cli_version": "2.3.0"
+    },
+    {
+        "pubkey": "831be7675152746b557bd40993806fba6a0067c04c9849523fe4a542d76578db19d62545989df94351cb3a8567cc487a",
+        "withdrawal_credentials": "010000000000000000000000b1748c79709f4ba2dd82834b8c82d4a505003f27",
+        "amount": 32000000000,
+        "signature": "b43410deb477c6504898ccbbc7a6f592a9bc7821b6c6a522cf24cc882f23898519f642e87ce6d4ae90888c54bb989d910c02fd9dd1f2ce490889a9116a4abbfd8a18f625e97a5857f088cee1e3bc7e00f57777507cad3c0cf7f97fb9a161fe33",
+        "deposit_message_root": "ed7f087f78cc31ac242389077fb7d2e49587bea09728049f8fe705dd9fe754ea",
+        "deposit_data_root": "ce331ab2590a5756ca17bd53c041c9c7dd2490d656db2f0342e6ae91353dc0d8",
+        "fork_version": "00000000",
+        "network_name": "mainnet",
+        "deposit_cli_version": "2.3.0"
+    },
+    {
+        "pubkey": "a8832987aff1d4f3a6082d16e253fa4b441e081b6086d1a637428bf8fdb3e9ba3210cc34e302829c18d3e0c5ced74450",
+        "withdrawal_credentials": "010000000000000000000000b1748c79709f4ba2dd82834b8c82d4a505003f27",
+        "amount": 32000000000,
+        "signature": "a61aba76e1339f3639f4ed07e25cbf5761ef18cfded0575f35dbc5d663c993a5e635184e6723a61843348d2cdc681727076ee8102c5ece72703bcf895e5aadb65b3737261671228de2db1a87c358df4dc40fda4add97f75c462a8f10a6bf4121",
+        "deposit_message_root": "ac5b6d7f7448bed72586ccb615203fb12233350053bfba2b02a04fd8ad79d49c",
+        "deposit_data_root": "2fa653e8de24dbf3dde31ec8835a06d0e8c9cfe6baffa5d86060ab6da5696aad",
+        "fork_version": "00000000",
+        "network_name": "mainnet",
+        "deposit_cli_version": "2.3.0"
+    }
+]
