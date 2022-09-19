@@ -30,6 +30,8 @@ contract xERC4626Test is Test {
     
     
     function setUp() public {
+        vm.warp(0); // Fuzz fails without!!
+        
         // Set the withdrawal credentials (must be done at compile time due to .env loading)
         WITHDRAWAL_CREDENTIALS = vm.envBytes("VALIDATOR_TEST_WITHDRAWAL_CREDENTIALS0");
 
@@ -54,7 +56,6 @@ contract xERC4626Test is Test {
         owner = payable(vm.addr(ownerPrivateKey));
         spender = payable(vm.addr(spenderPrivateKey));
         
-        vm.warp(0); // Fuzz fails without!!
         //emit log_timestamp(block.timestamp);
         
     }
