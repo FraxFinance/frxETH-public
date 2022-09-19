@@ -73,7 +73,7 @@ To make new dependencies play nicely with VSCode:
 # Contracts Under Review
 ## ERC20PermitPermissionedMint.sol
 Parent contract for frxETH.sol. Has EIP-712/EIP-2612 permit capability, is burnable, and has an array of authorized minters. Is also owned.
-## frxETH.sol
+## frxETH.sol 
 Basically the same as ERC20PermitPermissionedMint.sol
 ## frxETHMinter.sol
 Authorized minter for frxETH. Users deposit ETH for frxETH. It then deposits that ETH into ETH 2.0 staking validators to earn yield. It can also withhold part of the ETH deposit for future use, such as to earn yield in other places to supplement the ETH 2.0 staking yield.
@@ -102,3 +102,20 @@ xTRIBE, which is xERC4626.sol based and has some functions that sfrxETH.sol uses
 [M-02](https://github.com/code-423n4/2022-04-xtribe-findings/issues/66)
 ### OperatorRegistry.sol
 No checking for valid validator pubkeys, signatures, etc are done here. They are assumed to be done off chain before they are added. However, the official ETH 2.0 DepositContract.sol DOES do checks and will revert if something is wrong. It is assumed that the team, or the manager(s) of the OperatorRegistry.sol contract will remove/replace the offending invalid validators.
+
+
+<!-- //////////////////////////////////////////////////////////////// -->
+# Contest Scope
+- frxETH Repository: [https://github.com/FraxFinance/frxETH-public](https://github.com/FraxFinance/frxETH-public)
+- 5 Non-library contracts in the scope
+- 365 Total sLoC in scope.
+- Contracts use inheritance, most of the parents are time/battle tested Openzeppelin or other contracts
+- Most public interaction will be with frxETHMinter.sol, then sfrxETH.sol 
+- frxETH.sol conforms to EIP-712/EIP-2612 and ERC-20 standards and uses Openzeppelin and Synthetix.io parents
+- sfrxETH.sol conforms to EIP-712/EIP-2612, ERC-4626, and ERC-20 standards
+- No novel or unique curve logic or mathematical models
+- Not an NFT
+- Not an AMM
+- Not a fork of a popular project
+- Does not use rollups
+- Single-chain only
