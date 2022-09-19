@@ -8,12 +8,13 @@
 <!-- //////////////////////////////////////////////////////////////// -->
 # Building and Testing
 ## Setup
-1) Install [foundry](https://book.getfoundry.sh/getting-started/installation)
-2) ```forge install```
-3) ```git submodule update --init --recursive```
-4) (Optional) Occasionally update / pull your submodules to keep them up to date. ```git submodule update --recursive --remote```
-5) Create your own .env and copy SAMPLE.env into there. Sample mainnet validator deposit keys are in test/deposit_data-TESTS-MAINNET.json if you need more.
-6) You don't need to add PRIVATE_KEY, ETHERSCAN_KEY, or FRXETH_OWNER if you are not actually deploying on live mainnet
+1) ```git clone https://github.com/FraxFinance/frxETH-public.git --recurse-submodules --remote-submodules```
+2) Install [foundry](https://book.getfoundry.sh/getting-started/installation)
+3) ```forge install```
+4) ```git submodule update --init --recursive```
+5) (Optional) Occasionally update / pull your submodules to keep them up to date. ```git submodule update --recursive --remote```
+6) Create your own .env and copy SAMPLE.env into there. Sample mainnet validator deposit keys are in test/deposit_data-TESTS-MAINNET.json if you need more.
+7) You don't need to add PRIVATE_KEY, ETHERSCAN_KEY, or FRXETH_OWNER if you are not actually deploying on live mainnet
 
 ### Forge
 Manually, forced
