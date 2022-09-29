@@ -38,16 +38,44 @@ import "openzeppelin-contracts/contracts/security/ReentrancyGuard.sol";
     mint() - deposit targeting a specific number of sfrxETH out
     deposit() - deposit knowing a specific number of frxETH in */
 contract sfrxETH is xERC4626, ReentrancyGuard {
+
+    modifier andSync {
+        if (block.timestamp >= rewardsCycleEnd) { syncRewards(); } 
+        _;
+    }
+
     /* ========== CONSTRUCTOR ========== */
     constructor(ERC20 _underlying, uint32 _rewardsCycleLength)
         ERC4626(_underlying, "Staked Frax Ether", "sfrxETH")
         xERC4626(_rewardsCycleLength)
     {}
 
-    /// @notice Syncs rewards if applicable beforehand. Noop if otherwise 
-    function beforeWithdraw(uint256 assets, uint256 shares) internal override {
-        super.beforeWithdraw(assets, shares); // call xERC4626's beforeWithdraw first
-        if (block.timestamp >= rewardsCycleEnd) { syncRewards(); } 
+    /// @notice inlines syncRewards with deposits when able
+    function deposit(uint256 assets, address receiver) public override andSync returns (uint256 shares) {
+        return super.deposit(assets, receiver);
+    }
+    
+    /// @notice inlines syncRewards with mints when able
+    function mint(uint256 shares, address receiver) public override returns (uint256 assets) {
+        return super.mint(shares, receiver);
+    }
+
+    /// @notice inlines syncRewards with withdrawals when able
+    function withdraw(
+        uint256 assets,
+        address receiver,
+        address owner
+    ) public override andSync returns (uint256 shares) {
+        return super.withdraw(assets, receiver, owner);
+    }
+
+    /// @notice inlines syncRewards with redemptions when able
+    function redeem(
+        uint256 shares,
+        address receiver,
+        address owner
+    ) public override returns (uint256 assets) {
+        return super.redeem(shares, receiver, owner);
     }
 
     /// @notice How much frxETH is 1E18 sfrxETH worth. Price is in ETH, not USD
