@@ -38,16 +38,44 @@ import "openzeppelin-contracts/contracts/security/ReentrancyGuard.sol";
     mint() - deposit targeting a specific number of sfrxETH out
     deposit() - deposit knowing a specific number of frxETH in */
 contract sfrxETH is xERC4626, ReentrancyGuard {
+
+    modifier andSync {
+        if (block.timestamp >= rewardsCycleEnd) { syncRewards(); } 
+        _;
+    }
+
     /* ========== CONSTRUCTOR ========== */
     constructor(ERC20 _underlying, uint32 _rewardsCycleLength)
         ERC4626(_underlying, "Staked Frax Ether", "sfrxETH")
         xERC4626(_rewardsCycleLength)
     {}
 
-    /// @notice Syncs rewards if applicable beforehand. Noop if otherwise 
-    function beforeWithdraw(uint256 assets, uint256 shares) internal override {
-        super.beforeWithdraw(assets, shares); // call xERC4626's beforeWithdraw first
-        if (block.timestamp >= rewardsCycleEnd) { syncRewards(); } 
+    /// @notice inlines syncRewards with deposits when able
+    function deposit(uint256 assets, address receiver) public override andSync returns (uint256 shares) {
+        return super.deposit(assets, receiver);
+    }
+    
+    /// @notice inlines syncRewards with mints when able
+    function mint(uint256 shares, address receiver) public override andSync returns (uint256 assets) {
+        return super.mint(shares, receiver);
+    }
+
+    /// @notice inlines syncRewards with withdrawals when able
+    function withdraw(
+        uint256 assets,
+        address receiver,
+        address owner
+    ) public override andSync returns (uint256 shares) {
+        return super.withdraw(assets, receiver, owner);
+    }
+
+    /// @notice inlines syncRewards with redemptions when able
+    function redeem(
+        uint256 shares,
+        address receiver,
+        address owner
+    ) public override andSync returns (uint256 assets) {
+        return super.redeem(shares, receiver, owner);
     }
 
     /// @notice How much frxETH is 1E18 sfrxETH worth. Price is in ETH, not USD
@@ -68,22 +96,6 @@ contract sfrxETH is xERC4626, ReentrancyGuard {
         uint256 amount = approveMax ? type(uint256).max : assets;
         asset.permit(msg.sender, address(this), amount, deadline, v, r, s);
         return (deposit(assets, receiver));
-    }
-
-    /// @notice Approve and mint() in one transaction
-    /// @dev Similar to the deposit method, but you give it the number of shares you want instead.
-    function mintWithSignature(
-        uint256 shares,
-        address receiver,
-        uint256 deadline,
-        bool approveMax,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) external nonReentrant returns (uint256 assets) {
-        uint256 amount = approveMax ? type(uint256).max : previewMint(shares);
-        asset.permit(msg.sender, address(this), amount, deadline, v, r, s);
-        return (mint(shares, receiver));
     }
 
 }
