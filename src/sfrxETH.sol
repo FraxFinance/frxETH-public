@@ -56,7 +56,7 @@ contract sfrxETH is xERC4626, ReentrancyGuard {
     }
     
     /// @notice inlines syncRewards with mints when able
-    function mint(uint256 shares, address receiver) public override returns (uint256 assets) {
+    function mint(uint256 shares, address receiver) public override andSync returns (uint256 assets) {
         return super.mint(shares, receiver);
     }
 
@@ -74,7 +74,7 @@ contract sfrxETH is xERC4626, ReentrancyGuard {
         uint256 shares,
         address receiver,
         address owner
-    ) public override returns (uint256 assets) {
+    ) public override andSync returns (uint256 assets) {
         return super.redeem(shares, receiver, owner);
     }
 
@@ -97,5 +97,5 @@ contract sfrxETH is xERC4626, ReentrancyGuard {
         asset.permit(msg.sender, address(this), amount, deadline, v, r, s);
         return (deposit(assets, receiver));
     }
-    
+
 }
