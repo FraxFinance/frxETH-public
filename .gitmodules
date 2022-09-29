@@ -12,5 +12,5 @@
 	# ignore = dirty
 [submodule "lib/ERC4626"]
 	path = lib/ERC4626
-	url = https://github.com/fei-protocol/ERC4626
+	url = https://github.com/corddry/ERC4626
 	# ignore = dirty
