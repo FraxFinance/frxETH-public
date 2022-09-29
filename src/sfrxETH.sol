@@ -97,21 +97,5 @@ contract sfrxETH is xERC4626, ReentrancyGuard {
         asset.permit(msg.sender, address(this), amount, deadline, v, r, s);
         return (deposit(assets, receiver));
     }
-
-    /// @notice Approve and mint() in one transaction
-    /// @dev Similar to the deposit method, but you give it the number of shares you want instead.
-    function mintWithSignature(
-        uint256 shares,
-        address receiver,
-        uint256 deadline,
-        bool approveMax,
-        uint8 v,
-        bytes32 r,
-        bytes32 s
-    ) external nonReentrant returns (uint256 assets) {
-        uint256 amount = approveMax ? type(uint256).max : previewMint(shares);
-        asset.permit(msg.sender, address(this), amount, deadline, v, r, s);
-        return (mint(shares, receiver));
-    }
-
+    
 }
