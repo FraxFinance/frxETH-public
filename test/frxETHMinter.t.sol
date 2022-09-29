@@ -224,7 +224,7 @@ contract frxETHMinterTest is Test {
         // Try having the validator deposit.
         // Should fail due to lack of ETH
         vm.expectRevert("Not enough ETH in contract");
-        minter.depositEther();
+        minter.depositEther(10);
 
         // Deposit last 1 ETH for frxETH, making the total 32.
         // Uses submitAndGive as an alternate method. Timelock will get the frxETH but the validator doesn't care
@@ -235,12 +235,12 @@ contract frxETHMinterTest is Test {
         minter.submitAndGive{ value: 1 ether }(FRAX_TIMELOCK);
         
         // Move the 32 ETH to the validator
-        minter.depositEther();
+        minter.depositEther(10);
 
         // Try having the validator deposit another 32 ETH.
         // Should fail due to lack of ETH
         vm.expectRevert("Not enough ETH in contract");
-        minter.depositEther();
+        minter.depositEther(10);
 
         // Deposit 32 ETH for frxETH
         minter.submit{ value: 32 ether }();
@@ -248,7 +248,7 @@ contract frxETHMinterTest is Test {
         // Try having the validator deposit another 32 ETH.
         // Should fail due to lack of a free validator
         vm.expectRevert("Validator stack is empty");
-        minter.depositEther();
+        minter.depositEther(10);
 
         // Pause submits
         minter.togglePauseSubmits();
@@ -265,7 +265,7 @@ contract frxETHMinterTest is Test {
 
         // Try submitting while paused (should fail)
         vm.expectRevert("Depositing ETH is paused");
-        minter.depositEther();
+        minter.depositEther(10);
 
         // Unpause validator ETH deposits
         minter.togglePauseDepositEther();
@@ -274,7 +274,7 @@ contract frxETHMinterTest is Test {
         minter.addValidator(OperatorRegistry.Validator(pubKeys[1], sigs[1], ddRoots[1]));
 
         // Should finally work again
-        minter.depositEther();
+        minter.depositEther(10);
 
         vm.stopPrank();
     }
@@ -304,7 +304,7 @@ contract frxETHMinterTest is Test {
         // Try having the validator deposit.
         // Should fail due to lack of ETH because half of it was withheld
         vm.expectRevert("Not enough ETH in contract");
-        minter.depositEther();
+        minter.depositEther(10);
 
         // Deposit another 32 ETH for frxETH. 
         // 16 ETH will be withheld and the other 16 ETH will be available for the validator
@@ -315,7 +315,7 @@ contract frxETHMinterTest is Test {
         minter.submit{ value: 32 ether }();
         
         // Move the 32 ETH to the validator. Should work now because 16 + 16 = 32
-        minter.depositEther();
+        minter.depositEther(10);
 
         // Set the withhold ratio back to 0
         minter.setWithholdRatio(0);
@@ -331,7 +331,7 @@ contract frxETHMinterTest is Test {
         minter.addValidator(OperatorRegistry.Validator(pubKeys[1], sigs[1], ddRoots[1]));
 
         // Move the 32 ETH to the validator. Should work immediately
-        minter.depositEther();
+        minter.depositEther(10);
 
         vm.stopPrank();
     }

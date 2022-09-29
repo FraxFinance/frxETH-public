@@ -20,7 +20,6 @@ interface IsfrxETH {
     function maxRedeem(address owner) external view returns (uint256);
     function maxWithdraw(address owner) external view returns (uint256);
     function mint(uint256 shares, address receiver) external returns (uint256 assets);
-    function mintWithSignature(uint256 shares, address receiver, uint256 deadline, bool approveMax, uint8 v, bytes32 r, bytes32 s) external returns (uint256 assets);
     function name() external view returns (string memory);
     function nonces(address) external view returns (uint256);
     function permit(address owner, address spender, uint256 value, uint256 deadline, uint8 v, bytes32 r, bytes32 s) external;
