@@ -696,6 +696,118 @@ contract xERC4626Test is Test {
         assertEq(sfrxETHtoken.balanceOf(owner), transfer_amount);
     }
 
+    // function test_DepositWithSignatureMaxPermit(uint256 fuzz_amount) public {
+    //     uint256 transfer_amount = fuzz_amount % (1 ether); // Restrict the fuzz amount to 1 ether and under
+    //     getQuickfrxETH();
+
+    //     SigUtils.Permit memory permit = SigUtils.Permit({
+    //         owner: owner,
+    //         spender: address(sfrxETHtoken),
+    //         value: type(uint256).max,
+    //         nonce: frxETHtoken.nonces(owner),
+    //         deadline: 1 days
+    //     });
+
+    //     bytes32 digest = sigUtils_frxETH.getTypedDataHash(permit);
+
+    //     (uint8 v, bytes32 r, bytes32 s) = vm.sign(ownerPrivateKey, digest);
+
+    //     vm.prank(owner);
+    //     if (transfer_amount == 0) vm.expectRevert("ZERO_SHARES");
+    //     sfrxETHtoken.depositWithSignature(
+    //         transfer_amount,
+    //         permit.owner,
+    //         permit.deadline,
+    //         true,
+    //         v,
+    //         r,
+    //         s
+    //     );
+    //     if (transfer_amount == 0) return;
+
+    //     assertEq(frxETHtoken.balanceOf(owner), 1 ether - transfer_amount);
+    //     assertEq(frxETHtoken.balanceOf(address(sfrxETHtoken)), transfer_amount);
+
+    //     // Max allowances never decrease due to spending, per ERC20
+    //     assertEq(frxETHtoken.allowance(owner, address(sfrxETHtoken)), type(uint256).max);
+
+    //     assertEq(frxETHtoken.nonces(owner), 1);
+    //     assertEq(sfrxETHtoken.balanceOf(owner), transfer_amount);
+    // }
+
+    // function test_MintWithSignatureLimitedPermit(uint256 fuzz_amount) public {
+    //     uint256 transfer_amount = fuzz_amount % (1 ether); // Restrict the fuzz amount to 1 ether and under
+    //     getQuickfrxETH();
+
+    //     SigUtils.Permit memory permit = SigUtils.Permit({
+    //         owner: owner,
+    //         spender: address(sfrxETHtoken),
+    //         value: transfer_amount,
+    //         nonce: frxETHtoken.nonces(owner),
+    //         deadline: 1 days
+    //     });
+
+    //     bytes32 digest = sigUtils_frxETH.getTypedDataHash(permit);
+
+    //     (uint8 v, bytes32 r, bytes32 s) = vm.sign(ownerPrivateKey, digest);
+
+    //     vm.prank(owner);
+    //     // if (transfer_amount == 0) vm.expectRevert("ZERO_SHARES");
+    //     sfrxETHtoken.mintWithSignature(
+    //         transfer_amount,
+    //         permit.owner,
+    //         permit.deadline,
+    //         false,
+    //         v,
+    //         r,
+    //         s
+    //     );
+    //     // if (transfer_amount == 0) return;
+
+    //     assertEq(frxETHtoken.balanceOf(owner), 1 ether - transfer_amount);
+    //     assertEq(frxETHtoken.balanceOf(address(sfrxETHtoken)), transfer_amount);
+
+    //     assertEq(frxETHtoken.allowance(owner, address(sfrxETHtoken)), 0);
+    //     assertEq(frxETHtoken.nonces(owner), 1);
+
+    //     assertEq(sfrxETHtoken.balanceOf(owner), transfer_amount);
+    // }
+
+    // function test_MintWithSignatureMaxPermit(uint256 fuzz_amount) public {
+    //     uint256 transfer_amount = fuzz_amount % (1 ether); // Restrict the fuzz amount to 1 ether and under
+    //     getQuickfrxETH();
+
+    //     SigUtils.Permit memory permit = SigUtils.Permit({
+    //         owner: owner,
+    //         spender: address(sfrxETHtoken),
+    //         value: type(uint256).max,
+    //         nonce: frxETHtoken.nonces(owner),
+    //         deadline: 1 days
+    //     });
+
+    //     bytes32 digest = sigUtils_frxETH.getTypedDataHash(permit);
+
+    //     (uint8 v, bytes32 r, bytes32 s) = vm.sign(ownerPrivateKey, digest);
+
+    //     vm.prank(owner);
+    //     sfrxETHtoken.mintWithSignature(
+    //         transfer_amount,
+    //         permit.owner,
+    //         permit.deadline,
+    //         true,
+    //         v,
+    //         r,
+    //         s
+    //     );
+
+    //     assertEq(frxETHtoken.balanceOf(owner), 1 ether - transfer_amount);
+    //     assertEq(frxETHtoken.balanceOf(address(sfrxETHtoken)), transfer_amount);
+
+    //     assertEq(frxETHtoken.allowance(owner, address(sfrxETHtoken)), type(uint256).max);
+    //     assertEq(frxETHtoken.nonces(owner), 1);
+
+    //     assertEq(sfrxETHtoken.balanceOf(owner), transfer_amount);
+    // }
 
     // frxETHMinter submitAndDeposit tests
     // NOTE: Need to test with a mainnet fork for this not revert
@@ -722,7 +834,7 @@ contract xERC4626Test is Test {
     // OTHER TESTS
     // ===========================================================
 
-    function mintTo(address to, uint256 amount) public {
+    function mintFXETHTo(address to, uint256 amount) public {
         vm.prank(frxETHMinterEOA);
         frxETHtoken.minter_mint(to, amount);
     }
@@ -737,7 +849,7 @@ contract xERC4626Test is Test {
         }
 
         // Mint frxETH to this testing contract from nothing, for testing
-        mintTo(address(this), combined);
+        mintFXETHTo(address(this), combined);
         frxETHtoken.approve(address(sfrxETHtoken), combined);
 
         // Generate some sfrxETH to this testing contract using frxETH
@@ -745,7 +857,7 @@ contract xERC4626Test is Test {
         require(sfrxETHtoken.totalAssets() == seed, "seed");
 
         // Mint frxETH "rewards" to sfrxETH. This mocks earning ETH 2.0 staking rewards.
-        mintTo(address(sfrxETHtoken), reward);
+        mintFXETHTo(address(sfrxETHtoken), reward);
         require(sfrxETHtoken.lastRewardAmount() == 0, "reward");
         require(sfrxETHtoken.totalAssets() == seed, "totalassets");
         require(sfrxETHtoken.convertToAssets(seed) == seed); // 1:1 still
@@ -789,7 +901,7 @@ contract xERC4626Test is Test {
         }
 
         // Mint frxETH to this testing contract from nothing, for testing
-        mintTo(address(this), combined);
+        mintFXETHTo(address(this), combined);
         frxETHtoken.approve(address(sfrxETHtoken), combined);
 
         // Generate some sfrxETH to this testing contract using frxETH
@@ -797,7 +909,7 @@ contract xERC4626Test is Test {
         require(sfrxETHtoken.totalAssets() == seed, "seed");
 
         // Mint frxETH "rewards" to sfrxETH. This mocks earning ETH 2.0 staking rewards.
-        mintTo(address(sfrxETHtoken), reward);
+        mintFXETHTo(address(sfrxETHtoken), reward);
         require(sfrxETHtoken.lastRewardAmount() == 0, "reward");
         require(sfrxETHtoken.totalAssets() == seed, "totalassets");
         require(sfrxETHtoken.convertToAssets(seed) == seed); // 1:1 still
@@ -839,7 +951,7 @@ contract xERC4626Test is Test {
 
         // Mint frxETH to this testing contract from nothing, for testing
         uint256 combined = uint256(deposit1) + uint256(deposit2);
-        mintTo(address(this), combined);
+        mintFXETHTo(address(this), combined);
 
         // Generate sfrxETH to this testing contract, part 1
         frxETHtoken.approve(address(sfrxETHtoken), combined);
@@ -857,7 +969,7 @@ contract xERC4626Test is Test {
         vm.assume(deposit != 0 && withdraw != 0 && withdraw <= deposit);
         
         // Mint frxETH to this testing contract from nothing, for testing
-        mintTo(address(this), deposit);
+        mintFXETHTo(address(this), deposit);
 
         // Generate some sfrxETH to this testing contract using frxETH
         frxETHtoken.approve(address(sfrxETHtoken), deposit);
@@ -877,17 +989,17 @@ contract xERC4626Test is Test {
         }
 
         // Mint frxETH to this testing contract from nothing, for testing
-        mintTo(address(this), seed);
+        mintFXETHTo(address(this), seed);
         frxETHtoken.approve(address(sfrxETHtoken), seed);
 
         // Generate sfrxETH to the contract
         sfrxETHtoken.deposit(seed, address(this));
 
         // Mint frxETH "rewards" to sfrxETH. This mocks earning ETH 2.0 staking rewards.
-        mintTo(address(sfrxETHtoken), reward);
+        mintFXETHTo(address(sfrxETHtoken), reward);
 
         // Sync the rewards
-        sfrxETHtoken.syncRewards();
+        // sfrxETHtoken.syncRewards();
         warp = bound(warp, 0, 999);
         vm.warp(warp);
 
@@ -904,7 +1016,7 @@ contract xERC4626Test is Test {
         }
 
         // Mint frxETH to this testing contract from nothing, for testing
-        mintTo(address(this), seed);
+        mintFXETHTo(address(this), seed);
         frxETHtoken.approve(address(sfrxETHtoken), seed);
 
         // Generate sfrxETH to the contract
@@ -913,31 +1025,31 @@ contract xERC4626Test is Test {
         vm.warp(100);
 
         // Sync with no new rewards
-        sfrxETHtoken.syncRewards();
-        require(sfrxETHtoken.lastRewardAmount() == 0);  
-        require(sfrxETHtoken.lastSync() == 100);  
-        require(sfrxETHtoken.rewardsCycleEnd() == 1000);  
-        require(sfrxETHtoken.totalAssets() == seed);
-        require(sfrxETHtoken.convertToShares(seed) == seed);
+        // sfrxETHtoken.syncRewards();
+        assertEq(sfrxETHtoken.lastRewardAmount(), 0);  
+        assertEq(sfrxETHtoken.lastSync(), 0);  
+        assertEq(sfrxETHtoken.rewardsCycleEnd(), 1000);  
+        assertEq(sfrxETHtoken.totalAssets(), seed);
+        assertEq(sfrxETHtoken.convertToShares(seed), seed);
 
         // Fast forward to next cycle and add rewards
         vm.warp(1000);
 
         // Mint frxETH "rewards" to sfrxETH. This mocks earning ETH 2.0 staking rewards.
-        mintTo(address(sfrxETHtoken), reward);
+        mintFXETHTo(address(sfrxETHtoken), reward);
 
         // Sync with rewards this time
         sfrxETHtoken.syncRewards();
-        require(sfrxETHtoken.lastRewardAmount() == reward);  
-        require(sfrxETHtoken.totalAssets() == seed);
-        require(sfrxETHtoken.convertToShares(seed) == seed);
+        assertEq(sfrxETHtoken.lastRewardAmount(), reward);  
+        assertEq(sfrxETHtoken.totalAssets(), seed);
+        assertEq(sfrxETHtoken.convertToShares(seed), seed);
 
         // Fast forward
         vm.warp(2000);
 
-        require(sfrxETHtoken.lastRewardAmount() == reward);  
-        require(sfrxETHtoken.totalAssets() == combined);
-        require(sfrxETHtoken.convertToAssets(seed) == combined);
+        assertEq(sfrxETHtoken.lastRewardAmount(), reward);  
+        assertEq(sfrxETHtoken.totalAssets(), combined);
+        assertEq(sfrxETHtoken.convertToAssets(seed), combined);
         assertEq(sfrxETHtoken.convertToShares(combined), seed);
     }
 
@@ -950,7 +1062,7 @@ contract xERC4626Test is Test {
         }
 
         // Mint frxETH to this testing contract from nothing, for testing
-        mintTo(address(this), seed);
+        mintFXETHTo(address(this), seed);
         frxETHtoken.approve(address(sfrxETHtoken), seed);
 
         // Generate sfrxETH to the contract
@@ -959,31 +1071,35 @@ contract xERC4626Test is Test {
         vm.warp(100);
 
         // Mint frxETH "rewards" to sfrxETH. This mocks earning ETH 2.0 staking rewards.
-        mintTo(address(sfrxETHtoken), reward);
+        mintFXETHTo(address(sfrxETHtoken), reward);
 
         // Sync with new rewards
-        sfrxETHtoken.syncRewards();
-        require(sfrxETHtoken.lastRewardAmount() == reward);  
-        require(sfrxETHtoken.lastSync() == 100);  
-        require(sfrxETHtoken.rewardsCycleEnd() == 1000);  
-        require(sfrxETHtoken.totalAssets() == seed);
-        require(sfrxETHtoken.convertToShares(seed) == seed); // 1:1 still
+        assertEq(sfrxETHtoken.lastSync(), 0, 'sfrxETHtoken.lastSync');  
+        assertEq(sfrxETHtoken.rewardsCycleEnd(), 1000, 'sfrxETHtoken.rewardsCycleEnd');  
+        assertEq(sfrxETHtoken.totalAssets(), seed, 'sfrxETHtoken.totalAssets');
+        assertEq(sfrxETHtoken.convertToShares(seed), seed, 'sfrxETHtoken.convertToShares'); // 1:1 still
 
-        // Fast forward to next cycle and add rewards
+        // Fast forward to next cycle and check rewards
         vm.warp(1000);
-        mintTo(address(sfrxETHtoken), reward2); // seed new rewards
+        sfrxETHtoken.syncRewards();
+        assertEq(sfrxETHtoken.lastRewardAmount(), reward, 'sfrxETHtoken.lastRewardAmount [1st]');  
+
+        // Add a second set of rewards to this cycle
+        mintFXETHTo(address(sfrxETHtoken), reward2); // seed new rewards
+
+        // Fast forward 10 cycles
+        vm.warp(10000);
 
         // Sync the rewards
         sfrxETHtoken.syncRewards();
-        require(sfrxETHtoken.lastRewardAmount() == reward2);  
-        require(sfrxETHtoken.totalAssets() == combined1);
-        require(sfrxETHtoken.convertToAssets(seed) == combined1);
+        assertEq(sfrxETHtoken.lastRewardAmount(), reward2, 'sfrxETHtoken.lastRewardAmount [2nd]');  
+        assertEq(sfrxETHtoken.totalAssets(), combined1, 'sfrxETHtoken.totalAssets [2nd]');
+        assertEq(sfrxETHtoken.convertToAssets(seed), combined1, 'sfrxETHtoken.convertToAssets [2nd]');
 
-        // Fast forward two cycles
+        // Fast forward two cycles to make sure nothing changed
         vm.warp(2000);
-
-        require(sfrxETHtoken.lastRewardAmount() == reward2);  
-        require(sfrxETHtoken.totalAssets() == combined2);
-        require(sfrxETHtoken.convertToAssets(seed) == combined2);
+        assertEq(sfrxETHtoken.lastRewardAmount(), reward2, 'sfrxETHtoken.lastRewardAmount [3rd]');  
+        assertEq(sfrxETHtoken.totalAssets(), combined2, 'sfrxETHtoken.totalAssets [3rd]');
+        assertEq(sfrxETHtoken.convertToAssets(seed), combined2, 'sfrxETHtoken.convertToAssets [3rd]');
     }
 }
