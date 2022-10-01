@@ -126,7 +126,9 @@ contract frxETHMinter is OperatorRegistry, ReentrancyGuard {
         uint256 numDeposits = (address(this).balance - currentWithheldETH) / DEPOSIT_SIZE;
         require(numDeposits > 0, "Not enough ETH in contract");
 
-        uint256 loopsToUse = ((numDeposits > max_deposits) ? max_deposits : numDeposits);
+        uint256 loopsToUse = numDeposits;
+        if (max_deposits == 0) loopsToUse = numDeposits;
+        else if (numDeposits > max_deposits) loopsToUse = max_deposits;
 
         // Give each deposit chunk to an empty validator
         for (uint256 i = 0; i < loopsToUse; ++i) {
