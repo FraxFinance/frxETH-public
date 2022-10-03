@@ -12,6 +12,7 @@
 2) Install [foundry](https://book.getfoundry.sh/getting-started/installation)
 3) ```forge install```
 4) ```git submodule update --init --recursive```
+4a) ```cd ./lib/ERC4626 && git checkout main```. This should switch it to ```corddry```'s fork.
 5) (Optional) Occasionally update / pull your submodules to keep them up to date. ```git submodule update --recursive --remote```
 6) Create your own .env and copy SAMPLE.env into there. Sample mainnet validator deposit keys are in test/deposit_data-TESTS-MAINNET.json if you need more.
 7) You don't need to add PRIVATE_KEY, ETHERSCAN_KEY, or FRXETH_OWNER if you are not actually deploying on live mainnet
