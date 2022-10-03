@@ -12,6 +12,7 @@
 2) Install [foundry](https://book.getfoundry.sh/getting-started/installation)
 3) ```forge install```
 4) ```git submodule update --init --recursive```
+4a) ```cd ./lib/ERC4626 && git checkout main```. This should switch it to ```corddry```'s fork.
 5) (Optional) Occasionally update / pull your submodules to keep them up to date. ```git submodule update --recursive --remote```
 6) Create your own .env and copy SAMPLE.env into there. Sample mainnet validator deposit keys are in test/deposit_data-TESTS-MAINNET.json if you need more.
 7) You don't need to add PRIVATE_KEY, ETHERSCAN_KEY, or FRXETH_OWNER if you are not actually deploying on live mainnet
@@ -54,10 +55,13 @@ or ```source .env && forge test --fork-url $MAINNET_RPC_URL -m test_frxETHMinter
 
 ### Goerli
 #### Single deploy
-```forge create src/frxETH.sol:frxETH --private-key $PRIVATE_KEY --rpc-url $GOERLI_RPC_URL --verify --optimize --etherscan-api-key $ETHERSCAN_KEY --constructor-args $FRXETH_OWNER $TIMELOCK_ADDRESS```
+```source .env && forge create src/frxETH.sol:frxETH --private-key $PRIVATE_KEY --rpc-url $GOERLI_RPC_URL --verify --optimize --etherscan-api-key $ETHERSCAN_KEY --constructor-args $FRXETH_OWNER $TIMELOCK_ADDRESS```
 
 #### Group deploy script
-```forge script script/deployGoerli.s.sol:Deploy --rpc-url $GOERLI_RPC_URL --private-key $PRIVATE_KEY --broadcast --verify --etherscan-api-key $ETHERSCAN_KEY```
+Goerli
+```source .env && forge script script/deployGoerli.s.sol:Deploy --rpc-url $GOERLI_RPC_URL --private-key $PRIVATE_KEY --broadcast --verify --etherscan-api-key $ETHERSCAN_KEY```
+Mainnet
+```source .env && forge script script/deployMainnet.s.sol:Deploy --rpc-url $MAINNET_RPC_URL --private-key $PRIVATE_KEY --broadcast --verify --etherscan-api-key $ETHERSCAN_KEY```
 
 #### Etherscan Verification
 Sometimes the deploy scripts above fail with Etherscan's verification API. In that case, use:

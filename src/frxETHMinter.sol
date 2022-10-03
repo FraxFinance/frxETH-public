@@ -117,7 +117,8 @@ contract frxETHMinter is OperatorRegistry, ReentrancyGuard {
 
     /// @notice Deposit batches of ETH to the ETH 2.0 deposit contract
     /// @dev Usually a bot will call this periodically
-    function depositEther() external nonReentrant {
+    /// @param max_deposits Used to prevent gassing out if a whale drops in a huge amount of ETH. Break it down into batches.
+    function depositEther(uint256 max_deposits) external nonReentrant {
         // Initial pause check
         require(!depositEtherPaused, "Depositing ETH is paused");
 
@@ -125,8 +126,12 @@ contract frxETHMinter is OperatorRegistry, ReentrancyGuard {
         uint256 numDeposits = (address(this).balance - currentWithheldETH) / DEPOSIT_SIZE;
         require(numDeposits > 0, "Not enough ETH in contract");
 
+        uint256 loopsToUse = numDeposits;
+        if (max_deposits == 0) loopsToUse = numDeposits;
+        else if (numDeposits > max_deposits) loopsToUse = max_deposits;
+
         // Give each deposit chunk to an empty validator
-        for (uint256 i = 0; i < numDeposits; ++i) {
+        for (uint256 i = 0; i < loopsToUse; ++i) {
             // Get validator information
             (
                 bytes memory pubKey,
