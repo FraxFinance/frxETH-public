@@ -10,9 +10,9 @@ contract Deploy is Script {
     address constant OWNER_ADDRESS = 0xB1748C79709f4Ba2Dd82834B8c82D4a505003f27;
     address constant TIMELOCK_ADDRESS = 0x8412ebf45bAC1B340BbE8F318b928C466c4E39CA;
 
-    address constant DEPOSIT_CONTRACT_ADDRESS = 0xB1748C79709f4Ba2Dd82834B8c82D4a505003f27;
+    address constant DEPOSIT_CONTRACT_ADDRESS = 0x00000000219ab540356cBB839Cbe05303d7705Fa;
     bytes WITHDRAWAL_CREDENTIALS;
-    uint32 constant REWARDS_CYCLE_LENGTH = 1000;
+    uint32 constant REWARDS_CYCLE_LENGTH = 604800;
 
     function run() public {
         vm.startBroadcast();
