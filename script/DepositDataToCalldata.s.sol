@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 /*/////////////////////////////////////////////////////////////////////////////////////////
     DepositDataToCalldata.s.sol
     Foundry script for parsing a deposit_data.json file from staking-deposit-cli
-        into calldata for OperatorRegistry.addValidators()
+        into transaction data for OperatorRegistry.addValidators()
     staking-deposit-cli: https://github.com/ethereum/staking-deposit-cli
     Foundry Json reference: https://book.getfoundry.sh/cheatcodes/parse-json
 
@@ -13,7 +13,9 @@ pragma solidity ^0.8.0;
 
     Usage:
         1. Specify the path to your deposit_data.json in your .env as DEPOSIT_DATA_PATH
-        2. $ forge script depositDataminter.s.sol
+        2. $ source .env
+        3. $ forge script script/depositDataminter.s.sol
+        4. Use the final log output as data in a transaction to the frxETHMinter
 /////////////////////////////////////////////////////////////////////////////////////////*/
 
 import { stdJson } from "forge-std/stdJson.sol";
