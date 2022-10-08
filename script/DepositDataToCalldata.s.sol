@@ -70,6 +70,7 @@ contract jsonToMinter is Script, Test {
             ));
         }
         // Output the calldata for addValidators 
+        emit log("\Encoded addValidators transaction data: ");
         emit logs(abi.encodeWithSignature("addValidators((bytes,bytes,bytes32)[])", validators));
     }
 }
