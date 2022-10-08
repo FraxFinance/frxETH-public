@@ -14,7 +14,7 @@ pragma solidity ^0.8.0;
     Usage:
         1. Specify the path to your deposit_data.json in your .env as DEPOSIT_DATA_PATH
         2. $ source .env
-        3. $ forge script script/depositDataminter.s.sol
+        3. $ forge script script/DepositDataToCalldata.s.sol
         4. Use the final log output as data in a transaction to the frxETHMinter
 /////////////////////////////////////////////////////////////////////////////////////////*/
 
