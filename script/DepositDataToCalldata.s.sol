@@ -18,7 +18,7 @@ pragma solidity ^0.8.0;
         4. Use the final log output as data in a transaction to the frxETHMinter
 /////////////////////////////////////////////////////////////////////////////////////////*/
 
-import { stdJson } from "forge-std/stdJson.sol";
+import { stdJson } from "forge-std/StdJson.sol";
 import { Script } from "forge-std/Script.sol"; 
 import { Test } from "forge-std/Test.sol";
 import { frxETHMinter, OperatorRegistry } from "../src/frxETHMinter.sol";

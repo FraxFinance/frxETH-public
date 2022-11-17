@@ -38,6 +38,10 @@ If you need to fork mainnet, single test contract
 Verbosely test a single contract while forking mainnet
 or ```source .env && forge test --fork-url $MAINNET_RPC_URL -m test_frxETHMinter_submitAndDepositRegular -vvvvv``` for single test verbosity level 5
 
+
+### Other Scipts
+tsx validate-msig-add-validators.ts
+
 ### Slither
 1) Install [slither](https://github.com/crytic/slither#how-to-install)
 2) Slither a single contract
