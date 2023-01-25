@@ -14,37 +14,48 @@ pragma solidity ^0.8.0;
     Usage:
         1. Specify the path to your deposit_data.json in your .env as DEPOSIT_DATA_PATH
         2. $ source .env
-        3. $ forge script script/DepositDataToCalldata.s.sol
+        3. $ forge script script/DepositDataToCalldata.s.sol --sig "run(uint256 startIdx, uint256 count)" 0 50
         4. Use the final log output as data in a transaction to the frxETHMinter
 /////////////////////////////////////////////////////////////////////////////////////////*/
 
 import { stdJson } from "forge-std/StdJson.sol";
 import { Script } from "forge-std/Script.sol"; 
 import { Test } from "forge-std/Test.sol";
+import { console } from "forge-std/console.sol";
 import { frxETHMinter, OperatorRegistry } from "../src/frxETHMinter.sol";
 
-contract jsonToMinter is Script, Test {
+
+contract DepositDataToCalldata is Script, Test {
     using stdJson for string;
 
     OperatorRegistry.Validator[] public validators;
-    
+
     function run() public { 
+        this.run(0, 100000);
+    }
+    
+    function run(uint256 startIdx, uint256 count) public { 
+        console.log("startIdx: ", startIdx);
+        console.log("count: ", count);
         string memory target = vm.envString("DEPOSIT_DATA_PATH");
         string memory json = vm.readFile(target);
 
-        for(uint i = 0; ; i++) {
+        for(uint i = startIdx; i < (startIdx + count); i++) {
             // Build Json query string using i to access ith validator
-            string memory baseQuery = string.concat("$[", vm.toString(i));
+
+            // EXAMPLE QUERY SYNTAX https://crates.io/crates/jsonpath-rust
+            // DO NOT ADD $. HERE!!! IT will do it automatically
+            string memory baseQuery = string.concat("[", vm.toString(i));
 
             // First query to see if there's Json at i at all
             string memory rawQuery = string.concat(baseQuery, "]");
+            console.log("rawQuery: ", rawQuery);
             bytes memory raw = json.parseRaw(rawQuery);
 
             // Ends if the Json has ran out
             if (raw.length == 0) {
                 break;
             }
-
             // Finish building queries for necessary deposit parameters
             string memory pkQuery = string.concat(baseQuery, "].pubkey");
             string memory sigQuery = string.concat(baseQuery, "].signature");
