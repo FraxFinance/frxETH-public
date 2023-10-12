@@ -14,8 +14,9 @@ pragma solidity ^0.8.0;
     Usage:
         1. Specify the path to your deposit_data.json in your .env as DEPOSIT_DATA_PATH
         2. $ source .env
-        3. $ forge script script/DepositDataToCalldata.s.sol --sig "run(uint256 startIdx, uint256 count)" 0 50
+        3. $ forge script --no-auto-detect script/DepositDataToCalldata.s.sol --sig "run(uint256 startIdx, uint256 count)" 0 50
         4. Use the final log output as data in a transaction to the frxETHMinter
+        5. Test with "cd node-scripts" then "tsx validate-msig-add-validators.ts"
 /////////////////////////////////////////////////////////////////////////////////////////*/
 
 import { stdJson } from "forge-std/StdJson.sol";
