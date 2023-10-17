@@ -22,6 +22,7 @@ pragma solidity ^0.8.0;
 // Dennett: https://github.com/denett
 // Travis Moore: https://github.com/FortisFortuna
 // Jamie Turley: https://github.com/jyturley
+// Carter Carlson: https://github.com/pegahcarter
 
 import { ERC20, ERC4626, xERC4626 } from "ERC4626/xERC4626.sol";
 import "openzeppelin-contracts/contracts/security/ReentrancyGuard.sol";
@@ -40,8 +41,12 @@ import "openzeppelin-contracts/contracts/security/ReentrancyGuard.sol";
 contract sfrxETH is xERC4626, ReentrancyGuard {
 
     modifier andSync {
-        if (block.timestamp >= rewardsCycleEnd) { syncRewards(); } 
+        _andSync();
         _;
+    }
+
+    function _andSync() private {
+        if (block.timestamp >= rewardsCycleEnd) { syncRewards(); }
     }
 
     /* ========== CONSTRUCTOR ========== */

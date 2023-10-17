@@ -20,6 +20,7 @@ pragma solidity ^0.8.0;
 // Reviewer(s) / Contributor(s)
 // Travis Moore: https://github.com/FortisFortuna
 // Dennis: https://github.com/denett
+// Carter Carlson: https://github.com/pegahcarter
 
 import "./Utils/Owned.sol";
 
@@ -43,8 +44,12 @@ contract OperatorRegistry is Owned {
     }
 
     modifier onlyByOwnGov() {
-        require(msg.sender == timelock_address || msg.sender == owner, "Not owner or timelock");
+        _onlyByOwnGov();
         _;
+    }
+
+    function _onlyByOwnGov() private view {
+        require(msg.sender == timelock_address || msg.sender == owner, "Not owner or timelock");
     }
 
     /// @notice Add a new validator

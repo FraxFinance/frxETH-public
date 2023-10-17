@@ -38,14 +38,22 @@ contract ERC20PermitPermissionedMint is ERC20Permit, ERC20Burnable, Owned {
     /* ========== MODIFIERS ========== */
 
     modifier onlyByOwnGov() {
-        require(msg.sender == timelock_address || msg.sender == owner, "Not owner or timelock");
+        _onlyByOwnGov();
         _;
     }
 
+    function _onlyByOwnGov() private view {
+        require(msg.sender == timelock_address || msg.sender == owner, "Not owner or timelock");
+    }
+
     modifier onlyMinters() {
-       require(minters[msg.sender] == true, "Only minters");
+        _onlyMinters();
         _;
-    } 
+    }
+
+    function _onlyMinters() private view {
+       require(minters[msg.sender] == true, "Only minters");
+    }
 
     /* ========== RESTRICTED FUNCTIONS ========== */
 
